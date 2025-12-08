@@ -1,0 +1,205 @@
+**************************************************************** 
+* PROGRAM NAME                 : PASSENG                       * 
+* IMPORTANTE FILE              : PASS1,2,3,4,5,6,7,8           * 
+* PROGRAMMER                   : KERESTES                      * 
+* DATA OF WRITEN               : SEPT. 2022                    * 
+**************************************************************** 
+*                   PROBLEM  DEFINITION                        * 
+*                                                              * 
+*          INSERT DATA IN THE PASSENGERS TABLE DB2             * 
+**************************************************************** 
+* INPUT PARAMETERS:                                            * 
+*                                                              * 
+* CALL SUB-PROGRAM TO CONVERT XML IN COBOL VARIABLE            * 
+**************************************************************** 
+* OUTPUT PARAMETERS:                                           * 
+*                                                              * 
+* TABLE DB2 PASSENGERS                                         * 
+*                                                              * 
+* CLIENTID                     SERIAL                          * 
+* FIRSTNAME                    VARCHAR(30)                     * 
+* LASTNAME                     VARCHAR(30)                     * 
+* ADDRESS                      VARCHAR(250)                    * 
+* CITY                         VARCHAR(50)                     * 
+* COUNTRY                      VARCHAR(30)                     * 
+* ZIPCODE                      VARCHAR(15)                     * 
+* TELEPHONE                    VARCHAR(18)                     * 
+* EMAIL                        VARCHAR(100)                    * 
+**************************************************************** 
+                                                                 
+**************************************************************** 
+*                  IDENTIFICATION DIVISION.                    * 
+**************************************************************** 
+                                                                 
+ IDENTIFICATION DIVISION. 
+ PROGRAM-ID. PASSENG. 
+                                                                 
+**************************************************************** 
+*                        DATA DIVISION.                        * 
+**************************************************************** 
+                                                                 
+ DATA DIVISION. 
+                                                                 
+*------------------------* 
+ WORKING-STORAGE SECTION. 
+*------------------------* 
+                                                                 
+**************************************************************** 
+*                       XML TABLE STRUCTURE                    * 
+**************************************************************** 
+                                                                 
+ 01  PASSENGER-LIST. 
+     02 PASSENGER-TABLE OCCURS 80. 
+        03 FIRSTNAME             PIC X(30). 
+        03 LASTNAME              PIC X(30). 
+        03 ADDRE                 PIC X(250). 
+        03 CITY                  PIC X(50). 
+        03 COUNTRY               PIC X(30). 
+        03 ZIPCODE               PIC X(15). 
+        03 TELEPHONE             PIC X(18). 
+        03 EMAIL                 PIC X(100). 
+                                                                 
+**************************************************************** 
+*                     SUBPROGRAM VARIABLE                      * 
+**************************************************************** 
+                                                                 
+ 01  SUBPROGRAM                  PIC X(8). 
+                                                                 
+**************************************************************** 
+*                           COUTERS                            * 
+**************************************************************** 
+                                                                 
+ 01  COUNT1                      PIC 9(3). 
+ 01  COUNT2                      PIC 9(3). 
+ 01  COUNT3                      PIC 9(3). 
+                                                                  
+**************************************************************** 
+*                       SQL DELCARATIONS.                      * 
+**************************************************************** 
+                                                                  
+     EXEC SQL 
+         INCLUDE PASSENG 
+     END-EXEC. 
+                                                                  
+     EXEC SQL 
+         INCLUDE SQLCA 
+     END-EXEC. 
+                                                                  
+**************************************************************** 
+*                      PROCEDURE DIVISION.                     * 
+**************************************************************** 
+                                                                  
+ PROCEDURE DIVISION. 
+                                                                  
+**************************************************************** 
+* MAIN-PARA                                                    * 
+*                                                              * 
+* THIS PROGRAM WILL RECEIVE A XML FILE IN UTF-8, IT WILL       * 
+* CONVERT THE FILE AND PUT THE DATE IN A DB2 TABLE             * 
+**************************************************************** 
+                                                                  
+ MAIN-PARA. 
+                                                                  
+     PERFORM 0100-PROCESS-XML 
+     PERFORM 0200-INTO-DB2 
+     GOBACK. 
+                                                                  
+***************************************************************** 
+* 0100-PROCESS-XML                                              * 
+*                                                               * 
+* IT PROCESS THE XML FILE IN THE BUFFER AFTER THE READ STATEMENT* 
+***************************************************************** 
+                                                                  
+ 0100-PROCESS-XML. 
+                                                                  
+     MOVE 'SUXML' TO SUBPROGRAM 
+     CALL SUBPROGRAM USING PASSENGER-LIST. 
+                                                                  
+                                                                  
+**************************************************************** 
+* 0200-INTO-DB2                                                * 
+*                                                              * 
+* IT CONVERT THE TABLE 'PASSENGER-LIST' INTO DB2 STATEMENT AND * 
+* INSERT THE DATA IN A DB2 TABLE                               * 
+**************************************************************** 
+                                                                  
+ 0200-INTO-DB2. 
+                                                                  
+     PERFORM VARYING COUNT1 FROM 1 BY 1 UNTIL COUNT1 > 80 
+        PERFORM 0210-CONVERTION-XML-DB2 
+        PERFORM 0220-INSERT-DB2 
+     END-PERFORM. 
+                                                                  
+**************************************************************** 
+* 0210-CONVERTION-XML-DB2                                      * 
+*                                                              * 
+* IT FIT THE DATA FOR DB2 FORMAT                               * 
+**************************************************************** 
+                                                                  
+ 0210-CONVERTION-XML-DB2. 
+                                                                  
+     MOVE FIRSTNAME(COUNT1) TO PA-FIRSTNAME_TEXT 
+                                                                  
+     INSPECT FIRSTNAME(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 31 - COUNT2 
+     MOVE COUNT3 TO PA-FIRSTNAME_LEN 
+                                                                  
+     MOVE LASTNAME(COUNT1) TO PA-LASTNAME_TEXT 
+                                                                
+     INSPECT LASTNAME(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 31 - COUNT2 
+     MOVE COUNT3 TO PA-LASTNAME_LEN 
+                                                                
+     MOVE ADDRE(COUNT1) TO PA-ADDRESS_TEXT 
+                                                                
+     INSPECT ADDRE(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 254 - COUNT2 
+     MOVE COUNT3 TO PA-ADDRESS_LEN 
+                                                                
+     MOVE CITY(COUNT1) TO PA-CITY_TEXT 
+                                                                
+     INSPECT CITY(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 50 - COUNT2 
+     MOVE COUNT3 TO PA-CITY_LEN 
+                                                                
+     MOVE COUNTRY(COUNT1) TO PA-COUNTRY_TEXT 
+                                                                
+     INSPECT COUNTRY(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 30 - COUNT2 
+     MOVE COUNT3 TO PA-COUNTRY_LEN 
+                                                                
+     MOVE ZIPCODE(COUNT1) TO PA-ZIPCODE_TEXT 
+                                                                
+     INSPECT ZIPCODE(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 16 - COUNT2 
+     MOVE COUNT3 TO PA-ZIPCODE_LEN 
+                                                                
+     MOVE TELEPHONE(COUNT1) TO PA-TELEPHONE_TEXT 
+                                                                
+     INSPECT TELEPHONE(COUNT1) TALLYING COUNT2 FOR ALL SPACES 
+     COMPUTE COUNT3 = 18 - COUNT2 
+     MOVE COUNT3 TO PA-TELEPHONE_LEN 
+                                                                
+     MOVE EMAIL(COUNT1) TO PA-EMAIL_TEXT 
+                                                                
+     INSPECT EMAIL(COUNT1) TALLYING COUNT2 FOR ALL SPACES           
+     COMPUTE COUNT3 = 100 - COUNT2                                  
+     MOVE COUNT3 TO PA-EMAIL_LEN.                                   
+                                                                    
+****************************************************************    
+* 0220-INSERT-DB2                                              *    
+*                                                              *    
+* IT INSERT THE DATA IN DE DCLGEN TABLE INTO DB2 TABLE         *    
+****************************************************************    
+                                                                    
+ 0220-INSERT-DB2.                                                   
+                                                                    
+     EXEC SQL                                                       
+         INSERT INTO PASSENGERS                                     
+            (FIRSTNAME, LASTNAME, ADDRESS, CITY, COUNTRY,           
+             ZIPCODE, TELEPHONE, EMAIL)                             
+         VALUES                                                     
+         (:PA-FIRSTNAME_TEXT, :PA-LASTNAME_TEXT, :PA-ADDRESS_TEXT,  
+             :PA-CITY_TEXT, :PA-COUNTRY_TEXT, :PA-ZIPCODE_TEXT,     
+             :PA-TELEPHONE_TEXT, :PA-EMAIL_TEXT)                    
+     END-EXEC.                                                       

@@ -9,6 +9,7 @@
       },
       "devDependencies": {
         "@types/bun": "latest",
+        "prettier": "^3.7.4",
       },
       "peerDependencies": {
         "typescript": "^5",
@@ -45,6 +46,8 @@
     "opencode-windows-x64": ["opencode-windows-x64@1.0.134", "", { "os": "win32", "cpu": "x64" }, "sha512-jIW73cFC6gDMwrlLV70Tb2ybcMmKMeVSeJIKm1YELmzs5cnlDF4l5ffmryxYQcNIwTYeV24hgg2WGAN1rsdo/w=="],
 
     "opencode-windows-x64-baseline": ["opencode-windows-x64-baseline@1.0.134", "", { "os": "win32", "cpu": "x64" }, "sha512-2K7vaDulJLheATRPhKSTdn53bzjWkw69rGPyy6uwVyYuIvpjAyaqj/54UHhto7YIZ8kzEBtlrM+CB0fGnGcLow=="],
+
+    "prettier": ["prettier@3.7.4", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA=="],
 
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
