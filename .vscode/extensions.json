@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "mermaid-js.mermaid-markdown-syntax-highlighting",
+    "esbenp.prettier-vscode",
+    "sst-dev.opencode",
+    "oven.bun-vscode",
+    "redhat.vscode-yaml"
+  ]
+}
