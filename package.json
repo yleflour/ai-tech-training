@@ -2,9 +2,6 @@
   "name": "ai-tech-training",
   "type": "module",
   "private": true,
-  "workspaces": [
-    "3-codebase-writer"
-  ],
   "devDependencies": {
     "@types/bun": "latest",
     "prettier": "^3.7.4"
