@@ -1,12 +1,31 @@
-The goal of this project is to reverse engineer the COBOL-AIRLINES project.
+The objective of this project is to migrate the ./COBOL-AIRLINES to a modern website.
 
-## Cobol Project
-- Path: ./COBOL-AIRLINES/
-@./teardown/overview.md
+## Context
+- Legacy Codebase: ./COBOL-AIRLINES
+- Specification: ./teardown/overview.md
 
-## Teardown Project
+## Specifications
 - Path: ./teardown/
-- Models overview: ./teardown/models.md
-- Models documentation: ./teardown/models/{table-name}.md
-- Pages overview: ./teardown/pages.md
-- Pages documentation: ./teardown/pages/{page-name}.md
+- Models:
+  - Overview: ./teardown/models.md
+  - Documentation: ./teardown/models/{table-name}.md
+- Pages:
+  - Overview: ./teardown/pages.md
+  - Documentation: ./teardown/pages/{page-name}.md
+- Controllers:
+  - Overview: ./teardown/controllers.md
+  - Documentation: ./teardown/controllers/{controller-name}.md
+- Services:
+  - Overview: ./teardown/services.md
+  - Documentation: ./teardown/services/{service-name}.md
+- Fixtures:
+  - Overview: ./teardown/fixtures.md
+  - Documentation: ./teardown/fixtures/{fixture-name}.md
+
+## Stack
+- Language:Python 3.13
+- Runtime + Package Manager: uvicorn
+- Framework: Django 6
+- Database: SQLite
+- Type: SSR
+- UI Framework: Tailwind CSS
