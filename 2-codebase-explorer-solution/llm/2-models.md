@@ -18,6 +18,7 @@
 - {Index Name}: {Field Name}, {Field Name},...
 
 ## Relevant files
+<!-- Relevant files from the legacy codebase -->
 - [FileName.ext](relative/path/to/file/from/this/markdown/file)
 - ...
 

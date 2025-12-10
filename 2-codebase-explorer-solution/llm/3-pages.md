@@ -64,6 +64,7 @@ const schema = z4.object({/*...*/});
 ```
 
 ## Relevant files
+<!-- Relevant files from the legacy codebase -->
 - [FileName.ext](relative/path/to/file/from/this/markdown/file)
 - ...
 
