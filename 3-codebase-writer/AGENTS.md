@@ -1,26 +1,26 @@
 The objective of this project is to migrate the ./COBOL-AIRLINES to a modern website.
 
 ## Context
-- Legacy Codebase: ./COBOL-AIRLINES
-- Specification: ./teardown/overview.md
+- Legacy Codebase: ./legacy/COBOL-AIRLINES
+- Specification: ./legacy/teardown/overview.md
 
 ## Specifications
-- Path: ./teardown/
+- Path: ./legacy/teardown/
 - Models:
-  - Overview: ./teardown/models.md
-  - Documentation: ./teardown/models/{table-name}.md
+  - Overview: ./legacy/teardown/models.md
+  - Documentation: ./legacy/teardown/models/{table-name}.md
 - Pages:
-  - Overview: ./teardown/pages.md
-  - Documentation: ./teardown/pages/{page-name}.md
+  - Overview: ./legacy/teardown/pages.md
+  - Documentation: ./legacy/teardown/pages/{page-name}.md
 - Controllers:
-  - Overview: ./teardown/controllers.md
-  - Documentation: ./teardown/controllers/{controller-name}.md
+  - Overview: ./legacy/teardown/controllers.md
+  - Documentation: ./legacy/teardown/controllers/{controller-name}.md
 - Services:
-  - Overview: ./teardown/services.md
-  - Documentation: ./teardown/services/{service-name}.md
+  - Overview: ./legacy/teardown/services.md
+  - Documentation: ./legacy/teardown/services/{service-name}.md
 - Fixtures:
-  - Overview: ./teardown/fixtures.md
-  - Documentation: ./teardown/fixtures/{fixture-name}.md
+  - Overview: ./legacy/teardown/fixtures.md
+  - Documentation: ./legacy/teardown/fixtures/{fixture-name}.md
 
 ## Stack
 - Language:Python 3.13
