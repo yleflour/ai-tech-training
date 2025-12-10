@@ -29,3 +29,7 @@ The objective of this project is to migrate the ./COBOL-AIRLINES to a modern web
 - Database: SQLite
 - Type: SSR
 - UI Framework: Tailwind CSS
+
+## Django Project
+- Path: ./cobol_airlines/
+- Run: uv run python manage.py runserver
